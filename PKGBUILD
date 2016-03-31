@@ -21,24 +21,22 @@ optdepends=('rxvt-unicode: The terminal emulator used in the default config.'
             'perl-json-xs: For i3-save-tree'
             'perl-anyevent-i3: For i3-save-tree')
 options=('docs' '!strip')
-source=('git://github.com/Airblader/i3#branch=gaps')
+source=("$pkgname::git://github.com/Airblader/i3#branch=gaps")
 sha1sums=('SKIP')
 
-_gitname='i3'
-
 pkgver() {
-  cd "$srcdir/$_gitname"
+  cd "$pkgname"
   git describe --tags | sed 's/-/./g'
 }
 
 build() {
-  cd "$_gitname"
+  cd "$pkgname"
   make
   make -C man
 }
 
 package() {
-  cd "$_gitname"
+  cd "$pkgname"
 
   make DESTDIR="$pkgdir/" install
 
